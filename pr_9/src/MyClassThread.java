@@ -1,35 +1,41 @@
-class Ping extends Thread
-{
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class PingPong extends Thread {
+    static Lock lock = new ReentrantLock();
+    private String word;
+
+    private void setWord(String word)
+    {
+        this.word = word;
+    }
+
+    PingPong(String word)
+    {
+        this.setWord(word);
+    }
+
     @Override
     public void run()
     {
-        while (true)
+        for(;;)
         {
-            System.out.println("Ping");
+            System.out.println(this.word);
+            try {
+                PingPong.sleep(1000);
+            }catch (InterruptedException ex)
+            {
+
+            }
         }
     }
 }
+public class MyClassThread {
+    public static void main(String[] args) {
+        PingPong ping = new PingPong("ping");
+        PingPong pong = new PingPong("pong");
 
-class Pong extends Thread
-{
-    @Override
-    public void run()
-    {
-        while (true)
-        {
-            System.out.println("Pong");
-        }
-    }
-}
-
-public class MyClassThread
-{
-    static Ping pingword;
-    public static void main(String[] args)
-    {
-
-        Ping ping = new Ping();
-        Pong pong = new Pong();
-
+        ping.start();
+        pong.start();
     }
 }

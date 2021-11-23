@@ -18,15 +18,17 @@ class PingPong extends Thread {
     @Override
     public void run()
     {
-        for(;;)
+        for (;;)
         {
             System.out.println(this.word);
             try {
                 PingPong.sleep(1000);
             }catch (InterruptedException ex)
             {
-
+                //
             }
+            lock.lock();//a b s o l u t e l y
+            lock.unlock();//u s e l e s s ?
         }
     }
 }

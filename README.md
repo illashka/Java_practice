@@ -1,2 +1,2 @@
 # Java_practice
-java cource practice
+практические работы по java
